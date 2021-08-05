@@ -19,6 +19,9 @@ $previewPoll = $_GET["p"] ?? false;
 
 // Get active poll
 $activePollId = $LAUNCH->link->settingsGet("active-poll-id", false);
+if ($USER->instructor) {
+    echo '<a href="build.php" class="btn btn-link pull-right" style="clear:both;">Exit Student View <span class="fas fa-sign-out-alt" aria-hidden="true"></span></a>';
+}
 if (!$previewPoll && !$activePollId) {
     echo '<h3 class="text-muted" style="margin-top:0.5rem;margin-bottom:0.5rem;font-weight:300">Quick Poll</h3><p>There is not active poll at this time.</p>';
 } else {
@@ -32,9 +35,6 @@ if (!$previewPoll && !$activePollId) {
     if (!$activePoll) {
         echo '<p><em>Error: Unable to locate active poll. Please contact your instructor.</em></p>';
     } else {
-        if ($USER->instructor) {
-            echo '<a href="build.php" class="btn btn-link pull-right" style="clear:both;">Exit Student View <span class="fas fa-sign-out-alt" aria-hidden="true"></span></a>';
-        }
         if ($activePoll["anonymous"] == 1) {
             ?>
             <div class="pull-right"><h5 class="text-muted"><span class="fa fa-eye-slash" aria-hidden="true"></span> Anonymous</h5></div>
