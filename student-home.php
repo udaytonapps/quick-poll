@@ -23,7 +23,7 @@ if ($USER->instructor) {
     echo '<a href="build.php" class="btn btn-link pull-right" style="clear:both;">Exit Student View <span class="fas fa-sign-out-alt" aria-hidden="true"></span></a>';
 }
 if (!$previewPoll && !$activePollId) {
-    echo '<h3 class="text-muted" style="margin-top:0.5rem;margin-bottom:0.5rem;font-weight:300">Quick Poll</h3><p>There is not active poll at this time.</p>';
+    $OUTPUT->splashPage("Quick Poll", "There is no active poll at this time.");
 } else {
     // If preview and instructor set active poll to req. param.
     if ($USER->instructor && $previewPoll) {
