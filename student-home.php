@@ -19,12 +19,15 @@ $previewPoll = $_GET["p"] ?? false;
 
 // Get active poll
 $activePollId = $LAUNCH->link->settingsGet("active-poll-id", false);
-if ($USER->instructor) {
-    echo '<a href="build.php" class="btn btn-link pull-right" style="clear:both;">Exit Student View <span class="fas fa-sign-out-alt" aria-hidden="true"></span></a>';
-}
 if (!$previewPoll && !$activePollId) {
+    if ($USER->instructor) {
+        echo '<a href="build.php" class="h4 text-white pull-right" style="clear:both;">Exit Student View <span class="fas fa-sign-out-alt" aria-hidden="true"></span></a>';
+    }
     $OUTPUT->splashPage("Quick Poll", "There is no active poll at this time.");
 } else {
+    if ($USER->instructor) {
+        echo '<a href="build.php" class="btn btn-link pull-right" style="clear:both;">Exit Student View <span class="fas fa-sign-out-alt" aria-hidden="true"></span></a>';
+    }
     // If preview and instructor set active poll to req. param.
     if ($USER->instructor && $previewPoll) {
         $activePollId = $previewPoll;
