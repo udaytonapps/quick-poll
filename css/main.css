@@ -1,0 +1,166 @@
+.question-text {
+    padding: 0 1rem;
+}
+
+.question-row > a, .toolTitleAction,
+.answer-row > a, .toolTitleAction {
+    padding: 0 8px 0 0;
+    font-weight: normal;
+    color: #919191;
+}
+
+.question-row > a:hover,
+.question-row > a:focus,
+.question-row > a:active,
+.answer-row > a:hover,
+.answer-row > a:focus,
+.answer-row > a:active,
+.toolTitleAction:hover,
+.toolTitleAction:focus,
+.toolTitleAction:active {
+    color: #1066EB;
+}
+
+.question-text-span:hover, .title-text-span:hover {
+    background-color: #BEDCFE;
+}
+
+.bg-highlight {
+    background-color: #BEDCFE;
+}
+
+#addQuestions {
+    margin-top: 20px;
+}
+
+.answer-add-btn {
+    padding-left: 0;
+}
+
+.answer-delete-btn {
+    padding-right: 0;
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+
+div.checkbox {
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
+
+.import-link {
+    padding-left: 36px;
+}
+
+.import-body {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.response-panel-header,
+.response-list-group-item {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+div.header-col {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.response-row {
+    border-top: 1px solid #C4C4C4;
+    background-color: #FFEDC7;
+}
+
+a.response-collapse-link,
+a.response-collapse-link:active,
+a.response-collapse-link:focus,
+a.response-collapse-link:hover {
+    color: #111111;
+    opacity: 1;
+}
+
+.selected-row {
+    background-color: #FFC54A;
+}
+
+.response-badge {
+    background-color: #FFC54A;
+    color: #111111;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 21px;
+}
+
+.selected-row .badge.response-badge {
+    background-color: #ffffff;
+}
+
+p.response-text {
+    margin-top: 10px;
+}
+
+.results-table-hdr {
+    word-break: break-word;
+}
+
+.rotate {
+    -moz-transition: all 200ms linear;
+    -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+
+.rotate.open {
+    -ms-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+@media (max-width: 525px) {
+    .import-link {
+        display: block;
+        padding-top: 10px;
+        padding-left: 0;
+    }
+
+    #helpButton {
+        display: block;
+        margin: 0 0 0 auto;
+        float: none !important; /* import to override pull-right class */
+    }
+}
+
+input[type=checkbox] + label {
+    padding: 0 1rem 0 0;
+}
+
+a.list-group-item {
+    color: var(--primary);
+}
+
+a.list-group-item:hover {
+    background: #ebf8ff;
+    border-color: #007fc4;
+}
+
+.list-group-item-info {
+    color: var(--primary);
+}
+
+span.badge {
+    background: var(--primary);
+}
+
+div.progress {
+    height: 6px;
+    margin-bottom: 1rem;
+}
+
+div.progress-bar {
+    background: var(--primary);
+}
+.btn.disabled {
+    background: #efefef;
+}
