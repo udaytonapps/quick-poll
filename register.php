@@ -2,7 +2,7 @@
 
 $REGISTER_LTI2 = array(
     "name" => "Quick Poll",
-    "FontAwesome" => "fa-bar-char-o",
+    "FontAwesome" => "fa-bar-chart-o",
     "short_name" => "Quick Poll",
     "description" => "This app allows an instructor to ask users poll questions.",
     "messages" => array("launch"),
