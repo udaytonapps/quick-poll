@@ -98,13 +98,23 @@ $OUTPUT->topNav(false);
             <textarea class="form-control" rows="3" id="question" name="question" required></textarea>
         </div>
         <div id="choices">
-            <div class="form-group choice">
-                <label for="choice-1" class="sr-only">Choice <span data-choice="1">1</span></label>
-                <input type="text" name="choice[]" class="form-control" id="choice-1" placeholder="Choice 1">
+            <div class="flx-cntnr" id="choice-container-1">
+                <div class="form-group choice flx-grow-all">
+                    <label for="choice-1" class="sr-only">Choice <span data-choice="1">1</span></label>
+                    <input type="text" name="choice[]" class="form-control" id="choice-1" placeholder="Choice 1">
+                </div>
+                <div>
+                    <button type="button" class="btn btn-link remove-choice" data-remove="1" onclick="removeChoice(this);"><span class="fa fa-times" aria-hidden="true"></span><span class="sr-only">Remove Choice</span></button>
+                </div>
             </div>
-            <div class="form-group choice">
-                <label for="choice-2" class="sr-only">Choice <span data-choice="3">2</span></label>
-                <input type="text" name="choice[]" class="form-control" id="choice-2" placeholder="Choice 2">
+            <div class="flx-cntnr" id="choice-container-2">
+                <div class="form-group choice flx-grow-all">
+                    <label for="choice-2" class="sr-only">Choice <span data-choice="2">2</span></label>
+                    <input type="text" name="choice[]" class="form-control" id="choice-2" placeholder="Choice 2">
+                </div>
+                <div>
+                    <button type="button" class="btn btn-link remove-choice" data-remove="2" onclick="removeChoice(this);"><span class="fa fa-times" aria-hidden="true"></span><span class="sr-only">Remove Choice</span></button>
+                </div>
             </div>
         </div>
         <p class="text-center"><a href="javascript:void(0);" id="add-choice"><span class="fa fa-plus"></span> Add Choice</a>
@@ -140,13 +150,33 @@ $OUTPUT->footerStart();
                 let countChoices = $("div.choice").length;
                 countChoices++;
                 $("#choices").append(`
-                    <div class="form-group choice">
-                        <label for="choice-` + countChoices + `" class="sr-only">Choice <span data-choice="` + countChoices + `">` + countChoices + `</span></label>
-                        <input type="text" name="choice[]" class="form-control" id="choice-` + countChoices + `" placeholder="Choice ` + countChoices + `">
+                    <div class="flx-cntnr" id="choice-container-` + countChoices + `">
+                        <div class="form-group choice flx-grow-all">
+                            <label for="choice-` + countChoices + `" class="sr-only">Choice <span data-choice="` + countChoices + `">` + countChoices + `</span></label>
+                            <input type="text" name="choice[]" class="form-control" id="choice-` + countChoices + `" placeholder="Choice ` + countChoices + `">
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-link remove-choice" data-remove="` + countChoices + `" onclick="removeChoice(this);"><span class="fa fa-times" aria-hidden="true"></span><span class="sr-only">Remove Choice</span></button>
+                        </div>
                     </div>
-            `);
+                `);
             });
         });
+        function removeChoice(removeButton) {
+            let removeIndex = $(removeButton).data("remove");
+            let countChoices = $("div.choice").length;
+            for (let i = removeIndex; i < countChoices; i++) {
+                // Move all text up one
+                let next = i + 1;
+                let nextval = $("#choice-"+next).val();
+                if (nextval.length) {
+                    // Move text up one choice
+                    $("#choice-"+i).val(nextval);
+                }
+            }
+            // Remove last choice
+            $("#choice-container-"+countChoices).remove();
+        }
     </script>
 <?php
 $OUTPUT->footerEnd();

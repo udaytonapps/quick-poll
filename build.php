@@ -49,7 +49,8 @@ $activePollId = $LAUNCH->link->settingsGet("active-poll-id", false);
             $activePollChoicesStmt->execute(array(":pollId" => $activePollId));
             $activeChoices = $activePollChoicesStmt->fetchAll(PDO::FETCH_ASSOC);
             ?>
-            <div class="h4" style="font-weight:400;">
+            <h5 class="text-muted" style="margin-bottom:0;">Active Poll</h5>
+            <div class="h4" style="font-weight:400;margin-top:0;">
                 <div class="pull-right" style="z-index:1;">
                     <a href="editPoll.php?p=<?=$activePoll["poll_id"]?>" class="btn btn-default"><span class="fa fa-pencil" aria-hidden="true"></span><span class="sr-only">Edit Poll</span></a>
                     <a href="<?=$activePoll["anonymous"] == 1 ? 'javascript:void(0);" title="Anonymous Poll' : 'results.php?p='.$activePoll["poll_id"]?>" class="btn btn-default <?=$activePoll["anonymous"] == 1 ? 'disabled' : ''?>">
@@ -94,7 +95,7 @@ $allPolls = $allPollsStmt->fetchAll(PDO::FETCH_ASSOC);
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" href="#poll-library">Poll Library <small><?=$CONTEXT->title?></small></a>
+          <a data-toggle="collapse" href="#poll-library"><span class="fa fa-chevron-right poll-library-icon" aria-hidden="true"></span> Poll Library <small><?=$CONTEXT->title?></small></a>
       </h4>
     </div>
     <div id="poll-library" class="panel-collapse collapse">
@@ -106,16 +107,16 @@ if (!$allPolls || count($allPolls) == 0) {
 }
 foreach($allPolls as $poll) {
     ?>
-    <div class="h4 flx-cntnr" style="font-weight:400;">
+    <div class="h4 flx-cntnr" style="font-weight:400;align-items:top;">
         <div>
         <?php
         if ($poll["poll_id"] == $activePollId) {
             ?>
-            <a href="toggleActivePoll.php?p=<?=$poll["poll_id"]?>" class="btn btn-primary" style="margin-right:1rem;"><span class="fa fa-star" aria-hidden="true"></span><span class="sr-only">Active</span></a>
+            <a href="toggleActivePoll.php?p=<?=$poll["poll_id"]?>" class="btn btn-link" style="margin-right:1rem;font-size:1.5rem;padding: 0;"><span class="fa fa-toggle-on" aria-hidden="true"></span><span class="sr-only">Active</span></a>
             <?php
         } else {
             ?>
-            <a href="toggleActivePoll.php?p=<?=$poll["poll_id"]?>" class="btn btn-default" style="margin-right:1rem;"><span class="fa fa-star-o" aria-hidden="true"></span><span class="sr-only">Inactive</span></a>
+            <a href="toggleActivePoll.php?p=<?=$poll["poll_id"]?>" class="btn btn-link" style="margin-right:1rem;font-size:1.5rem;padding: 0;"><span class="fa fa-toggle-off text-muted" aria-hidden="true"></span><span class="sr-only">Inactive</span></a>
             <?php
         }
         ?>
@@ -144,4 +145,16 @@ echo '</div>
 </div> ';// end poll library panel
 
 $OUTPUT->footerStart();
+?>
+<script>
+    $(document).ready(function(){
+        const libraryIcon = $(".poll-library-icon");
+        $("#poll-library").on('show.bs.collapse', function() {
+            libraryIcon.addClass('fa-chevron-down').removeClass('fa-chevron-right');
+        }).on('hide.bs.collapse', function() {
+            libraryIcon.addClass('fa-chevron-right').removeClass('fa-chevron-down');
+        });
+    });
+</script>
+<?php
 $OUTPUT->footerEnd();
