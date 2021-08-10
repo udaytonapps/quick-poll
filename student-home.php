@@ -112,7 +112,7 @@ if (!$previewPoll && !$activePollId) {
                     $pollStats["total"]++;
                 }
                 if ($activeChoices && count($activeChoices) > 0) {
-                    echo '<div class="list-group" style="margin-bottom:1rem;">';
+                    echo '<div class="list-group" style="margin-bottom:0.5rem;">';
                     foreach ($activeChoices as $choice) {
                         // Get total responses
                         $totalStmt = $PDOX->prepare("SELECT COUNT(*) AS total FROM {$p}qp_response WHERE poll_id = :pollId AND choice_id = :choiceId");
@@ -154,6 +154,7 @@ if (!$previewPoll && !$activePollId) {
                     }
                     echo '</div>';
                 }
+                echo '<p class="text-right" style="margin-bottom:1rem;"><strong>'.$pollStats["total"].'</strong> total responses</p>';
             }
             if ($activePoll["allowchange"] == 1) {
                 // Allowed to change response so add reset link
