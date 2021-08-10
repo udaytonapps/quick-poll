@@ -23,11 +23,10 @@ if (!$previewPoll && !$activePollId) {
     if ($USER->instructor) {
         echo '<p class="text-right" style="padding:0.5rem;"><a href="build.php" class="h4 pull-right" style="color:#fff;">Exit Student View <span class="fas fa-sign-out-alt" aria-hidden="true"></span></a></p>';
     }
-    $OUTPUT->splashPage("Quick Poll", "There is no active poll at this time.");
+    $OUTPUT->splashPage("Quick Poll", "There is no active poll at this time.", false, true);
 } else {
-    if ($USER->instructor) {
-        echo '<a href="build.php" class="btn btn-link pull-right" style="clear:both;">Exit Student View <span class="fas fa-sign-out-alt" aria-hidden="true"></span></a>';
-    }
+    $OUTPUT->topNav($menu);
+
     // If preview and instructor set active poll to req. param.
     if ($USER->instructor && $previewPoll) {
         $activePollId = $previewPoll;
@@ -43,12 +42,9 @@ if (!$previewPoll && !$activePollId) {
             <div class="pull-right"><h5 class="text-muted"><span class="fa fa-eye-slash" aria-hidden="true"></span> Anonymous</h5></div>
             <?php
         }
-        ?>
-        <h3 class="text-muted" style="margin-top:0.5rem;margin-bottom:0.5rem;font-weight:300">Quick Poll</h3>
-        <?php
         if ($USER->instructor) {
             // Add warning that response is for preview only
-            echo '<p class="alert alert-warning"><strong>Preview Mode:</strong> Your response will not be saved after your session ends and does not count towards the actual results.</p>';
+            echo '<p class="alert alert-warning" style="clear:both;"><strong>Preview Mode:</strong> Your response will not be saved after your session ends and does not count towards the actual results.</p>';
         }
         ?>
         <div class="h4" style="font-weight:400;">
