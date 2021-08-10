@@ -160,6 +160,8 @@ div.progress {
 
 div.progress-bar {
     background: var(--primary);
+    -webkit-transition: width 1.5s ease;
+    transition: width 1.5s ease;
 }
 .btn.disabled {
     background: #efefef;

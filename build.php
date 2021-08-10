@@ -64,7 +64,7 @@ $activePollId = $LAUNCH->link->settingsGet("active-poll-id", false);
             $totalStmt->execute(array(":pollId" => $activePollId));
             $pollStats = $totalStmt->fetch(PDO::FETCH_ASSOC);
             if ($activeChoices && count($activeChoices) > 0) {
-                echo '<div class="list-group" style="margin-bottom:1rem;">';
+                echo '<div class="list-group" style="margin-bottom:0.5rem;">';
                 foreach($activeChoices as $choice) {
                     // Get total responses
                     $totalStmt = $PDOX->prepare("SELECT COUNT(*) AS total FROM {$p}qp_response WHERE poll_id = :pollId AND choice_id = :choiceId");
@@ -76,7 +76,7 @@ $activePollId = $LAUNCH->link->settingsGet("active-poll-id", false);
                         <?=$choice["choice_text"]?>
                         <span class="badge"><?=$responseStats["total"]?></span>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="<?=$percentOfTotal?>" aria-valuemin="0" aria-valuemax="100" style="width:<?=$percentOfTotal?>%">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="<?=$percentOfTotal?>" aria-valuemin="0" aria-valuemax="100" data-width="<?=$percentOfTotal?>">
                             </div>
                         </div>
                     </div>
@@ -84,7 +84,7 @@ $activePollId = $LAUNCH->link->settingsGet("active-poll-id", false);
                 }
                 echo '</div>';
             }
-            echo '<p class="text-right"><strong>'.$pollStats["total"].'</strong> total responses</p>';
+            echo '<p class="text-right" style="margin-bottom:1rem;"><strong>'.$pollStats["total"].'</strong> total responses</p>';
         }
     }
 $allPollsStmt = $PDOX->prepare("SELECT * FROM {$p}qp_poll WHERE context_id = :contextId");
@@ -95,7 +95,7 @@ $allPolls = $allPollsStmt->fetchAll(PDO::FETCH_ASSOC);
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
-          <a data-toggle="collapse" href="#poll-library"><span class="fa fa-chevron-right poll-library-icon" aria-hidden="true"></span> Poll Library <small><?=$CONTEXT->title?></small></a>
+          <a data-toggle="collapse" href="#poll-library"><span class="fa fa-chevron-right poll-library-icon" aria-hidden="true"></span> Poll Library <small>[<?=$CONTEXT->title?>]</small></a>
       </h4>
     </div>
     <div id="poll-library" class="panel-collapse collapse">
@@ -153,6 +153,10 @@ $OUTPUT->footerStart();
             libraryIcon.addClass('fa-chevron-down').removeClass('fa-chevron-right');
         }).on('hide.bs.collapse', function() {
             libraryIcon.addClass('fa-chevron-right').removeClass('fa-chevron-down');
+        });
+        $(".progress-bar").each(function(){
+            let width = $(this).data("width");
+            $(this).css("width", width+"%");
         });
     });
 </script>

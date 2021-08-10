@@ -131,7 +131,7 @@ if (!$previewPoll && !$activePollId) {
                                 <span class="badge"><?=$responseStats["total"]?></span>
                                 <div class="progress">
                                     <div class="progress-bar" role="progressbar" aria-valuenow="<?=$percentOfTotal?>"
-                                         aria-valuemin="0" aria-valuemax="100" style="width:<?=$percentOfTotal?>%">
+                                         aria-valuemin="0" aria-valuemax="100" data-width="<?=$percentOfTotal?>">
                                     </div>
                                 </div>
                                 <div class="text-center"><span class="fa fa-check-circle-o" aria-hidden="true"></span> Selected</div>
@@ -145,7 +145,7 @@ if (!$previewPoll && !$activePollId) {
                                 <span class="badge"><?=$responseStats["total"]?></span>
                                 <div class="progress">
                                     <div class="progress-bar" role="progressbar" aria-valuenow="<?=$percentOfTotal?>"
-                                         aria-valuemin="0" aria-valuemax="100" style="width:<?=$percentOfTotal?>%">
+                                         aria-valuemin="0" aria-valuemax="100" data-width="<?=$percentOfTotal?>">
                                     </div>
                                 </div>
                             </div>
@@ -164,5 +164,14 @@ if (!$previewPoll && !$activePollId) {
 }
 
 $OUTPUT->footerStart();
-
+?>
+<script>
+    $(document).ready(function(){
+        $(".progress-bar").each(function(){
+            let width = $(this).data("width");
+            $(this).css("width", width+"%");
+        });
+    });
+</script>
+<?php
 $OUTPUT->footerEnd();
